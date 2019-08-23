@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:args/command_runner.dart';
 import 'package:io/ansi.dart';
-import 'package:vscout_cli/vscout_cli.dart';
+import 'package:vscout/vscout_cli.dart';
 
 // The exit code for a general error.
 int generalError = 1;

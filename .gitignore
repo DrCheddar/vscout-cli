@@ -42,6 +42,8 @@ doc/api/
 .pub-cache/
 .pub/
 /build/
+.metadata
+
 
 # Android related
 **/android/**/gradle-wrapper.jar

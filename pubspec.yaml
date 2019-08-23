@@ -28,8 +28,9 @@ dev_dependencies:
   json_annotation: ^2.4.0
   built_value: ^6.7.0
   build_runner: ^1.0.0
-  build_web_compilers: ^0.4.0
+  build_web_compilers: any
   uuid: ^2.0.2
+  test: any
   flutter_test:
     sdk: flutter
 executables:

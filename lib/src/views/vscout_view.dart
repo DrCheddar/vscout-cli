@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vscout/widgets/vscout_logo_widget.dart';
+import 'package:vscout/src/widgets/vscout_logo_widget.dart';
 
 class VscoutView extends StatefulWidget {
   @override

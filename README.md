@@ -1,4 +1,4 @@
-# vscout-cli
+# vscout_cli
 
 [![Build Status](https://travis-ci.org/seenrobotics/vscout-cli.svg?branch=master)](https://travis-ci.org/seenrobotics/vscout-cli)
 
