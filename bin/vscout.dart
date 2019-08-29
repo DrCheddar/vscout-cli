@@ -7,6 +7,7 @@ import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:io/ansi.dart';
 import 'package:path/path.dart';
+import 'package:vscout/src/database/filterHandler.dart';
 import 'package:yaml/yaml.dart';
 
 import 'package:vscout/vscout_cli.dart';
@@ -65,8 +66,10 @@ main(List<String> args) async {
   //  This is to prevent calls to an unfinished database object.
   // Add database related commands only if database exists, else only add [init] and [config].
 
-  await DatabaseHandler().initializeDatabase(config["database_location"]);
-  await DatabaseHandler().setStore(storeName: config["main_store"]);
+  await MainDatabaseHandler().initializeDatabase(config["database_location"]);
+  await MainDatabaseHandler().setStore(storeName: config["main_store"]);
+  await FilterHandler().initializeDatabase(config["database_location"]);
+  await FilterHandler().setStore();
   var runner = CommandRunner(
       'vscout',
       'Robotics scouting software'
