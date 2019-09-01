@@ -15,14 +15,14 @@ mixin VscoutCommand on Command {
   bool printResponse(verbose,
       {bool keysOnly = true, bool responseData = false}) {
     if (verbose == true) {
-      print('${this.results.readResponse(keysOnly)}\n');
+      print('${this.results.readResponse()}\n');
     } else if (responseData == true) {
       for (var data1 in this.results.data) {
-        print("$data1\r");
+        print("$data1\r\n");
       }
     } else if (!keysOnly) {
       for (Map data in this.results.data) {
-        print("$data\r");
+        print("$data\r\n");
       }
     } else {
       for (var key in this.results.keys) {
@@ -42,10 +42,17 @@ mixin VscoutCommand on Command {
       bool parsedOption = false;
       for (String option in results.options) {
         if (results.wasParsed(option)) {
-          optionArgs.add(Tuple2(option, results[option]));
-          args.add(results[option]);
-          parsedOption = true;
-          break;
+          if (argParser.options[option].isMultiple) {
+            optionArgs.add(Tuple2(option, results[option]));
+            args.add(results[option]);
+            parsedOption = true;
+            break;
+          } else {
+            print("hi");
+            this.request.options[option] = results[option];
+            parsedOption = true;
+            break;
+          }
         }
       }
       if (!parsedOption) {

@@ -6,7 +6,7 @@ import 'dart:io';
 
 import 'package:sembast/sembast.dart';
 import 'package:tuple/tuple.dart';
-
+import 'package:csv/csv.dart';
 import 'package:vscout/transfer.dart';
 import 'package:vscout/database.dart' show DatabaseHandler, ModifyHandler;
 
@@ -134,15 +134,20 @@ class MainDatabaseHandler extends DatabaseHandler {
   Future<Response> addEntry(List<Tuple2> entryRecords) async {
     List<List> dataList = List();
     List<String> keys = List();
+    Map metadata = Map();
+
     for (Tuple2 entryTuple in entryRecords) {
       if (entryTuple.item1 == "data") {
         dataList.add(entryTuple.item2);
       } else if (entryTuple.item1 == "json" && entryTuple.item2 is String) {
         dataList.add(JsonDecoder().convert(entryTuple.item2));
+      } else if (entryTuple.item1 == "metadata") {
+        metadata[entryTuple.item2[0]] = entryTuple.item2[1];
       }
     }
     Map<String, dynamic> entry = await convertData(dataList);
-    entry['time'] = now;
+    metadata['time'] = now;
+    entry['metadata'] = metadata;
     keys.add(randomId);
     await this.database.transaction((txn) async {
       await this.store.record(keys[0]).put(txn, entry);
@@ -221,6 +226,20 @@ class MainDatabaseHandler extends DatabaseHandler {
     return joinResponse(result);
   }
 
+  List<List> parseCsv(String csvPath) {
+    List<List> csv = CsvToListConverter()
+        .convert(File(csvPath).readAsStringSync(), eol: '\n');
+    List<List> list = List();
+    List<String> fields = csv[0].cast<String>();
+
+    print(fields.length);
+    for (List values in csv.sublist(1)) {
+      list.add([Map<String, dynamic>.fromIterables(fields, values)]);
+    }
+
+    return list;
+  }
+
   Future<List<Response>> lsEntries(List<Tuple2> entryRecords) async {
     List<String> keys = List();
     for (Tuple2 entryTuple in entryRecords) {
@@ -242,7 +261,6 @@ class MainDatabaseHandler extends DatabaseHandler {
       var recordMap = {'key': record.key, 'value': record.value};
       result.add(await this.respond(recordMap, 'LS'));
     }
-
     return result;
   }
 }

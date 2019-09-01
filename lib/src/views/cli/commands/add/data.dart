@@ -5,6 +5,9 @@ import 'package:args/command_runner.dart';
 import 'package:vscout/vscout_cli.dart' show VscoutCommand;
 
 import 'package:vscout/view_models.dart' show AddDataVM;
+import 'package:csv/csv.dart';
+import 'dart:io';
+import 'package:path/path.dart';
 
 class DataCommand extends Command with VscoutCommand {
   @override
@@ -16,7 +19,9 @@ class DataCommand extends Command with VscoutCommand {
     argParser
       ..addFlag('verbose', defaultsTo: false)
       ..addMultiOption('data', abbr: 'd', splitCommas: true)
-      ..addMultiOption('json', splitCommas: false);
+      ..addMultiOption('json', splitCommas: false)
+      ..addMultiOption('metadata', abbr: 'm', splitCommas: true);
+
     this.viewModel = AddDataVM();
     this.initializeStream();
   }
