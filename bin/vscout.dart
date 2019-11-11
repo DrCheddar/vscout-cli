@@ -6,16 +6,12 @@ import 'dart:io';
 
 import 'package:args/command_runner.dart';
 import 'package:io/ansi.dart';
-<<<<<<< HEAD
-import 'package:vscout/vscout_cli.dart';
-=======
 import 'package:path/path.dart';
 import 'package:vscout/src/database/filterHandler.dart';
 import 'package:yaml/yaml.dart';
 
 import 'package:vscout/vscout_cli.dart';
 import 'package:vscout/database.dart';
->>>>>>> filterRef
 
 // The exit code for a general error.
 String relativeConfigFilePath = "/../config.yaml";
