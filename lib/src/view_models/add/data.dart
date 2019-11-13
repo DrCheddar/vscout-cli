@@ -8,12 +8,12 @@ class AddDataVM extends ViewModel {
       input.setCallback((data) {
         this.outputController.add(data);
       });
-      input.recieveResponse(this.addData(input));
+      input.receiveResponse(this.addData(input));
     } else if (input.method == 'file') {
       input.setCallback((data) {
         this.outputController.add(data);
       });
-      input.recieveResponse(this.addFileData(input.queryParameters));
+      input.receiveResponse(this.addFileData(input.queryParameters));
     }
   }
 
@@ -21,6 +21,7 @@ class AddDataVM extends ViewModel {
     Response resultResponse =
         await this.databaseHandler.addEntry(data.optionArgs);
     this.result = resultResponse;
+    print(result.data);
     return this.result;
   }
 

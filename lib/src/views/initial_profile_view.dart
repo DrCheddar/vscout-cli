@@ -47,7 +47,7 @@ class CreateProfileViewState extends State<CreateProfileView> {
                           // Validate returns true if the form is valid, or false
                           // otherwise.
                           if (_formKey.currentState.validate()) {
-                            Navigator.pushNamed(context, '/');
+                            Navigator.pushNamed(context, '/list_view');
                           }
                         },
                         buttonText: "Let's go",

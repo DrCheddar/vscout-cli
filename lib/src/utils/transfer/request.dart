@@ -22,7 +22,7 @@ class Request<T> {
     this.method = method;
   }
 
-  recieveResponse(Future<Response> response) async {
+  receiveResponse(Future<Response> response) async {
     this.status = HttpStatus.processing;
     this.response = await response;
     await response.then((value) {

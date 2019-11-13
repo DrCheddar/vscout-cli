@@ -31,6 +31,7 @@ class DataCommand extends Command with VscoutCommand {
   @override
   run() async {
     this.parseArguments();
+    print(this.request.optionArgs);
     this.request.flags['new'] = argResults['new'];
     this.streamSubscription.resume();
     viewModel.inputController.add(this.request);

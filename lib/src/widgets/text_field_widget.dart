@@ -6,12 +6,14 @@ class TextFieldWidget extends StatelessWidget {
       this.hintText,
       this.labelText,
       this.prefixIcon,
-      this.validator});
+      this.validator,
+      this.onChanged});
   final String fieldType;
   final String hintText;
   final String labelText;
   final Icon prefixIcon;
   final FormFieldValidator validator;
+  final void Function(String) onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +51,7 @@ class TextFieldWidget extends StatelessWidget {
         textAlign: TextAlign.left,
       ),
       TextFormField(
+        onChanged: onChanged,
           obscureText: obscureText,
           style: fieldStyle,
           keyboardType: keyboardType,

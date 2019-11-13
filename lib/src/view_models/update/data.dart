@@ -9,7 +9,7 @@ class UpdateDataVM extends ViewModel {
       input.setCallback((data) {
         this.outputController.add(data);
       });
-      input.recieveResponse(this.updateData(input));
+      input.receiveResponse(this.updateData(input));
     }
   }
 

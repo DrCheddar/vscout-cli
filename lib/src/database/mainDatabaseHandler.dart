@@ -146,7 +146,9 @@ class MainDatabaseHandler extends DatabaseHandler {
         dataList.add(JsonDecoder().convert(entryTuple.item2));
       }
     }
+    print(dataList);
     Map<String, dynamic> entry = await convertData(dataList);
+    print(entry);
     entry['time'] = now;
     keys.add(randomId);
     await this.database.transaction((txn) async {

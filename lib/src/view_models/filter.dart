@@ -10,7 +10,7 @@ class FilterVM extends ViewModel {
       input.setCallback((data) {
         this.outputController.add(data);
       });
-      input.recieveResponse(this.filterData(input));
+      input.receiveResponse(this.filterData(input));
     }
   }
 

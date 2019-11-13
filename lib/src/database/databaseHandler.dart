@@ -52,8 +52,9 @@ abstract class DatabaseHandler {
   Future openDb() async {
     // Only open an existing database, else, catch error and return false.
     try {
+      print(this.absoluteDatabasePath);
       this.database = await databaseFactoryIo
-          .openDatabase(this.absoluteDatabasePath, mode: DatabaseMode.existing);
+          .openDatabase(this.absoluteDatabasePath);
     } on DatabaseException catch (e) {
       return false;
     }

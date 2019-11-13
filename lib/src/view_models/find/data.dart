@@ -10,7 +10,8 @@ class FindDataVM extends ViewModel {
       input.setCallback((data) {
         this.outputController.add(data);
       });
-      input.recieveResponse(this.findFilter(input));
+   
+      input.receiveResponse(this.findFilter(input));
     }
   }
 

@@ -169,9 +169,24 @@ class FilterHandler extends DatabaseHandler {
             break;
           case "IN":
             {
-              filter = Filter.matches(key, value);
+              filter = Filter.matches(key, value, anyInList:  true);
             }
             break;
+            case "NOT" :
+            {
+              filter = Filter.custom((var record) {
+                return !(!(record[key] == null)&&RegExp(value).hasMatch(record[key]));
+                });
+            }
+            break;
+            case "ALL" : 
+            {
+              filter = Filter.custom((var record) { 
+               
+              });
+            }
+            break;
+
         }
       }
     }

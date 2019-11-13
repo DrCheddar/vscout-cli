@@ -8,7 +8,7 @@ class LsDataVM extends ViewModel {
       input.setCallback((data) {
         this.outputController.add(data);
       });
-      input.recieveResponse(this.lsData(input));
+      input.receiveResponse(this.lsData(input));
     }
   }
 

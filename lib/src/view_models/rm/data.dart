@@ -8,7 +8,7 @@ class RmDataVM extends ViewModel {
       input.setCallback((data) {
         this.outputController.add(data);
       });
-      input.recieveResponse(this.removeData(input));
+      input.receiveResponse(this.removeData(input));
     }
   }
 
