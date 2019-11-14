@@ -19,6 +19,9 @@ dependencies:
   dynamic_theme: ^1.0.0
   flutter_svg: ^0.14.0
   path_provider: ^1.4.0
+  fab_circular_menu: ^0.1.1
+  flutter_speed_dial: ^1.2.4
+  smooth_star_rating: ^1.0.3
 
 dev_dependencies:
   pedantic: ^1.7.0
