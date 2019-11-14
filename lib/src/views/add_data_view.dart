@@ -18,6 +18,7 @@ mixin MainBodyWidget {
 // This class holds data related to the form.
 class AddDataWidget extends StatefulWidget with MainBodyWidget {
   AddDataState mainState = AddDataState();
+  final _addDataVM = AddDataVM();
   @override
   createState() {
     mainState = AddDataState();
@@ -54,7 +55,20 @@ class AddDataWidget extends StatefulWidget with MainBodyWidget {
               backgroundColor: Colors.red,
               label: 'Save',
               labelStyle: TextStyle(fontSize: 18.0),
-              onTap: () => print('FIRST CHILD')),
+              onTap: () {
+                // Validate returns true if the form is valid, or false
+                // otherwise.
+                Request _request = Request("data");
+                for(var textPair in mainState.inputFields) {
+                  _request.optionArgs.add(Tuple2("data", textPair.value ));
+                }
+                mainState.inputFields.removeWhere((var a) => true);
+                mainState.setState(() {
+                  mainState.inputFields.add(InputField.shortText());
+                });
+                _addDataVM.inputController.add(_request);
+
+              }),
           SpeedDialChild(
               child: Icon(Icons.short_text),
               backgroundColor: Colors.blue,
@@ -102,7 +116,6 @@ class AddDataState extends State<AddDataWidget> {
   // Note: This is a `GlobalKey<FormState>`,
   // not a GlobalKey<AddDataWidget>.
   final _formKey = GlobalKey<FormState>();
-  final _addDataVM = AddDataVM();
   @override
   void dispose() {
     inputFields.forEach((var field) => field.dispose());
@@ -124,6 +137,7 @@ class AddDataState extends State<AddDataWidget> {
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
+    
     return Form(
         key: _formKey,
         child: Container(
@@ -133,7 +147,7 @@ class AddDataState extends State<AddDataWidget> {
                 Expanded(
                     child: ListView.builder(
                   itemBuilder: (BuildContext context, int index) =>
-                      inputFields[index],
+                  inputFields[index],
                   itemCount: inputFields.length,
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
@@ -161,7 +175,14 @@ abstract class InputField extends StatelessWidget {
       SizedBox(height: 10.0),
       Row(children: <Widget>[
         Expanded(child: Divider(thickness: 2, color: Colors.white, indent: 5, endIndent: 5,)),
-        Text("OR"),
+         FloatingActionButton(
+      backgroundColor: Colors.white,
+      foregroundColor: Colors.red,
+      mini: true,
+      elevation: 0,
+      child: Icon(Icons.close),
+      onPressed: () => {},
+    ),
         Expanded(child: Divider(thickness: 2, color: Colors.white, indent: 5, endIndent: 5,)),
       ]),
       keyField,
@@ -327,9 +348,9 @@ class StarState extends State<StarWidget> {
           },
           starCount: 5,
           rating: starWatcher.value,
-          size: 40.0,
-          color: Colors.green,
-          borderColor: Colors.green,
+          size: 35.0,
+          color: Colors.white,
+          borderColor: Colors.white,
           spacing: 0.0)
     ]);
   }
