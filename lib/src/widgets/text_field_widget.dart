@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatelessWidget {
-  const TextFieldWidget(
+  TextFieldWidget(
       {this.fieldType,
       this.hintText,
       this.labelText,
       this.prefixIcon,
-      this.validator,
-      this.onChanged});
+      this.validator
+      });
   final String fieldType;
   final String hintText;
   final String labelText;
   final Icon prefixIcon;
   final FormFieldValidator validator;
-  final void Function(String) onChanged;
+  String _text;
+  String get text => _text;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +52,10 @@ class TextFieldWidget extends StatelessWidget {
         textAlign: TextAlign.left,
       ),
       TextFormField(
-        onChanged: onChanged,
+        onChanged: (var value) {
+           print(value);
+           _text = value;
+           print(text);},
           obscureText: obscureText,
           style: fieldStyle,
           keyboardType: keyboardType,

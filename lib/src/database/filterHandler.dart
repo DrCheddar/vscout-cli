@@ -169,7 +169,7 @@ class FilterHandler extends DatabaseHandler {
             break;
           case "IN":
             {
-              filter = Filter.matches(key, value, anyInList:  true);
+              filter = Filter.matches(key, value);
             }
             break;
             case "NOT" :
